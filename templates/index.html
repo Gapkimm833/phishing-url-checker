@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Phishing URL Checker</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 100px; }
+    h1 { color: #333; }
+  </style>
+</head>
+<body>
+  <h1>Phishing URL Checker</h1>
+
+  <form method="POST">
+    <input type="text" name="url" placeholder="กรอก URL ที่ต้องการตรวจสอบ" required>
+    <button type="submit">ตรวจสอบ</button>
+  </form>
+
+  {% if result %}
+    <p>{{ result }}</p>
+  {% endif %}
+</body>
+</html>
