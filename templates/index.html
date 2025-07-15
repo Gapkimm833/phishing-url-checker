@@ -1,110 +1,97 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Phishing URL Checker</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom right, #fceabb, #f8b500);
       font-family: 'Segoe UI', sans-serif;
-      color: #333;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      flex-direction: column;
+      height: 100vh;
+      color: white;
     }
 
-    .card {
-      background: #fff;
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
       border-radius: 20px;
-      padding: 40px 30px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
       text-align: center;
-      max-width: 450px;
       width: 90%;
-      animation: fadeIn 1s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card img {
-      width: 120px;
-      margin-bottom: 15px;
+      max-width: 450px;
     }
 
     h1 {
-      font-size: 1.8rem;
-      color: #ff6f00;
       margin-bottom: 20px;
+      color: #00ffd0;
+      font-size: 28px;
     }
 
     input[type="text"] {
-      width: 100%;
       padding: 12px;
+      width: 100%;
+      border: none;
       border-radius: 10px;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
-      font-size: 1rem;
+      margin-bottom: 15px;
+      font-size: 16px;
     }
 
     button {
-      padding: 10px 30px;
-      background-color: #ff6f00;
-      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #00ffd0;
       border: none;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #e65c00;
+      color: #000;
+      font-weight: bold;
     }
 
     .result {
       margin-top: 20px;
+      font-size: 18px;
       font-weight: bold;
-      font-size: 1.1rem;
-      color: #444;
     }
 
-    footer {
+    .safe {
+      color: #00ff88;
+    }
+
+    .unsafe {
+      color: #ff4d4d;
+      background-color: #300;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .character {
       margin-top: 20px;
-      font-size: 0.9rem;
-      color: #555;
-      opacity: 0.8;
+      max-width: 150px;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712102.png" alt="น้องคิม">
-    <h1>คิมจะช่วยตรวจ URL ให้คุณ!</h1>
-
+  <div class="container">
+    <h1>Phishing URL Checker</h1>
     <form method="POST">
-      <input type="text" name="url" placeholder="วาง URL ที่ต้องการตรวจสอบ" required />
-      <br />
-      <button type="submit">ตรวจสอบเลย!</button>
+      <input type="text" name="url" placeholder="ใส่ URL ที่ต้องการตรวจสอบ..." required>
+      <br>
+      <button type="submit">ตรวจสอบ</button>
     </form>
 
     {% if result %}
-      <div class="result">
-        📋 ผลการตรวจสอบ: <strong>{{ result }}</strong>
-      </div>
+      <p class="result {% if result == 'ไม่ปลอดภัย' %}unsafe{% else %}safe{% endif %}">{{ result }}</p>
+
+      {% if result == 'ไม่ปลอดภัย' %}
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="การ์ตูนโกรธ" class="character" style="display:block;">
+      {% endif %}
     {% endif %}
   </div>
-
-  <footer>
-    สร้างโดย Gapkim • โปรเจคจบปี4
-  </footer>
 </body>
 </html>
